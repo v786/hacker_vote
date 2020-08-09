@@ -1,0 +1,9 @@
+{% if latest_candidate_list %}
+    <ul>
+    {% for candidate in latest_candidate_list %}
+        <li><a href="{% url 'hackers:detail' candidate.id %}">{{ candidate.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

@@ -1,0 +1,19 @@
+{{ candidate }}
+
+<h1>{{ candidate.name }}</h1>
+<ul>
+{% for expertise in candidate.expertise_set.all %}
+    <li>{{ expertise.skill }}</li>
+{% endfor %}
+</ul>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'hackers:vote' candidate.id %}" method="post">
+{% csrf_token %}
+{% for vote in candidate.vote_set.all %}
+    <input type="radio" name="vote" id="vote{{ forloop.counter }}" value="{{ vote.id }}">
+    <label for="vote{{ forloop.counter }}">{{ vote.count }}</label><br>
+{% endfor %}
+<input type="submit" value="Vote">
+</form>
